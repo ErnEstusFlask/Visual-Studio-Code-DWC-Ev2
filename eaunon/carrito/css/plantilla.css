@@ -406,39 +406,6 @@ h2{
     color: white;
 
 }
-.calc{
-    text-align: center;
-}
-#numeros{
-    width: 55px; 
-    height: 55px;
-    position: relative;
-    background-color:rgb(32, 27, 17);
-    color :rgb(255, 171, 0);
-}
-#oper{
-    width: 55px; 
-    height: 55px;
-    position: relative;
-    
-}
-#operH{
-    width: 110px; 
-    height: 55px;
-    position: relative;
-}
-#operW{
-    width: 55px; 
-    height: 110px;
-    position: relative;
-}
-.txt{
-    width: 230px;
-}
-
-#calc{
-    height: 55px;
-    position: relative;
-    background-color:rgb(32, 27, 17);
-    color :rgb(255, 171, 0);
+.agotado{
+    text-decoration:line-through;
 }

@@ -79,8 +79,13 @@ h2{
 }
 #tablPuzz{
     border-collapse: collapse;
-    border-spacing: 0;
+    border: 3px solid rgb(32, 27, 17);
 }
-#tablPuzz td{
-    padding: 0;
+td{
+    padding-left:3px;
+    padding-right:3px;
 }
+.emptycell{
+
+}
+
