@@ -39,8 +39,23 @@ $(function () {
                 price = parseInt(price[0]);
                 var contPric = parseInt($("#cprice").val());
                 $("#cprice").attr("value", contPric + price + " €");
-            }
+                /*
+                $("#cart_items").append("<div id='" + cId + "' class='item'>" + $("#" + this.id).html() + "</div>");
+                $(cId).addClass("icart");
+                $(cId).children(".stock").hide()
+                */
+                $("#" + this.id).clone().prependTo("#cart_items").attr("id", "c" + this.id).attr("class", "icart").children(".stock").hide();
+                $(".icart").children().andSelf().css("cursor", "default");
 
+                var $delete = $('<a href="" class="delete"></a>');
+
+
+
+                $("#c" + this.id).prepend($delete);
+
+                //$delete.click($(this).parent());
+
+            }
         }
     }
 });
