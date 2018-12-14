@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mouse</title>
+</head>
+
+<body>
+    <h3>onclick</h3>
+    <p id="click" onclick="fClick()">Si haces click se activara un alert</p>
+
+    <h3>ondblclick</h3>
+    <p id="dbclick" ondblclick="fdblClick()">Si haces dobleclick se activara un alert</p>
+
+    <h3>onmousedown/onmouseup</h3>
+    <p id="mDown" onmousedown="fmouseD()" onmouseup="fmouseU()">Cambia el color si mantienes pulsado o sueltas el raton</p>
+
+    <h3>onmouseover/onmouseout</h3>
+    <p id="mOver" onmouseover="mOver()" onmouseout="mOut()">Si pasas el raton por encima cambia el color del fondo</p>
+    <script>
+        function fClick() {
+            alert("Has hecho click")
+        }
+        function fdblClick() {
+            alert("Has hecho dobleclick")
+        }
+        function fmouseD() {
+            document.getElementById("mDown").style.color = "crimson";
+        }
+        function fmouseU() {
+            document.getElementById("mDown").style.color = "rgb(00, 200, 00)";
+        }
+        function mOver() {
+            document.getElementById("mOver").style.backgroundColor = "crimson";
+        }
+        function mOut() {
+            document.getElementById("mOver").style.backgroundColor = "rgb(00, 200, 00)";
+        }
+    </script>
+</body>
+
+</html>

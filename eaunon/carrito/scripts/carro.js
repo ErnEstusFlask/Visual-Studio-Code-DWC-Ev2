@@ -23,38 +23,45 @@ $(function () {
     }
 
     function comprar_articulo() {
-        if ($("#" + this.id).children(".stock").text() != "Stock 0") {
-            var stock = $("#" + this.id).children(".stock").text();
+        var totPrice = 0;
+        var itId = ("#" + this.id);
+        if ($(itId).children(".stock").text() != "Stock 0") {
+            var stock = $(itId).children(".stock").text();
             stock = stock.split(" ");
             stock = parseInt(stock[1]) - 1;
-            $("#" + this.id).children(".stock").text("Stock " + stock);
+            $(itId).children(".stock").text("Stock " + stock);
+            var $delete = $('<a class="delete"></a>');
+            var contIt = parseInt($("#citem").val());
+            $("#citem").attr("value", contIt + 1);
+
+            var price = $(itId).children(".price").text();
+            price = price.split(" ");
+            price = parseInt(price[0]);
+            var contPric = parseInt($("#cprice").val());
+            $("#cprice").attr("value", contPric + price + " €");
+            $(itId).clone().prependTo("#cart_items").attr("id", "c" + this.id).attr("class", "icart").children(".stock").hide();
+            $(".icart").children().andSelf().css("cursor", "default");
+
+            var pId = "#c" + this.id;
+            $('#cart_items').children(pId).prepend($delete);
             if (stock == 0) {
-                $("#" + this.id).children(".stock").addClass("agotado");
+                $(itId).children(".stock").addClass("agotado");
             } else {
-                var contIt = parseInt($("#citem").val());
-                $("#citem").attr("value", contIt + 1);
+                $delete.click(function () {
+                    $(itId).children(".stock").text("Stock " + (parseInt(stock) + 1));
+                    $(pId).remove();
+                    var itemsC = document.querySelectorAll(".icart");
+                    var totIt = itemsC.length;
 
-                var price = $("#" + this.id).children(".price").text();
-                price = price.split(" ");
-                price = parseInt(price[0]);
-                var contPric = parseInt($("#cprice").val());
-                $("#cprice").attr("value", contPric + price + " €");
-                /*
-                $("#cart_items").append("<div id='" + cId + "' class='item'>" + $("#" + this.id).html() + "</div>");
-                $(cId).addClass("icart");
-                $(cId).children(".stock").hide()
-                */
-                $("#" + this.id).clone().prependTo("#cart_items").attr("id", "c" + this.id).attr("class", "icart").children(".stock").hide();
-                $(".icart").children().andSelf().css("cursor", "default");
+                    $("#citem").attr("value", totIt);
 
-                var $delete = $('<a href="" class="delete"></a>');
-
-
-
-                $("#c" + this.id).prepend($delete);
-
-                //$delete.click($(this).parent());
-
+                    var reprice = $(itId).children(".price").text();
+                    reprice = reprice.split(" ");
+                    alert("tusmuertos");
+                    reprice = parseInt(reprice[0]);
+                    var recontPric = parseInt($("#cprice").val());
+                    $("#cprice").attr("value", recontPric - reprice + " €");
+                });
             }
         }
     }
