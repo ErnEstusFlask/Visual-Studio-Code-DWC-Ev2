@@ -57,7 +57,6 @@ $(function () {
 
                     var reprice = $(itId).children(".price").text();
                     reprice = reprice.split(" ");
-                    alert("tusmuertos");
                     reprice = parseInt(reprice[0]);
                     var recontPric = parseInt($("#cprice").val());
                     $("#cprice").attr("value", recontPric - reprice + " €");
