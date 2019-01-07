@@ -67,6 +67,9 @@ h2{
     position: relative;
     
 }
+img{
+    width: 95px;
+}
 #operH{
     width: 110px; 
     height: 55px;
