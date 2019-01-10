@@ -17,13 +17,18 @@ $(function () {
     $("img[src*='camiseta']").css({ "border-color": "green" });
     */
 
+
+
     var items = document.querySelectorAll(".item");
     for (var i = 0; i < items.length; i++) {
         items[i].addEventListener("dblclick", comprar_articulo, false);
     }
+    /*
+        $(".item").each("dblclick", comprar_articulo, false);
+    */
+
 
     function comprar_articulo() {
-        var totPrice = 0;
         var itId = ("#" + this.id);
         if ($(itId).children(".stock").text() != "Stock 0") {
             var stock = $(itId).children(".stock").text();
@@ -33,7 +38,9 @@ $(function () {
             var $delete = $('<a class="delete"></a>');
             var contIt = parseInt($("#citem").val());
             $("#citem").attr("value", contIt + 1);
-
+            if (stock == 0) {
+                $(itId).children(".stock").addClass("agotado");
+            }
             var price = $(itId).children(".price").text();
             price = price.split(" ");
             price = parseInt(price[0]);
@@ -44,25 +51,27 @@ $(function () {
 
             var pId = "#c" + this.id;
             $(pId).prepend($delete);
-            if (stock == 0) {
-                $(itId).children(".stock").addClass("agotado");
-            } else {
-                $delete.click(function () {
-                    $(itId).children(".stock").removeClass("agotado");
-                    $(itId).children(".stock").text("Stock " + (parseInt(stock) + 1));
-                    $(pId).remove();
-                    var itemsC = document.querySelectorAll(".icart");
-                    var totIt = itemsC.length;
 
-                    $("#citem").attr("value", totIt);
+            $delete.on("click", function () {
+                $(itId).children(".stock").removeClass("agotado");
+                var stockY = $(itId).children(".stock").text();
+                stockY = stockY.split(" ");
+                stockY = parseInt(stockY[1]);
+                $(itId).children(".stock").text("Stock " + (parseInt(stockY) + 1));
+                $(pId).remove();
+                var itemsC = document.querySelectorAll(".icart");
+                var totIt = itemsC.length;
 
-                    var reprice = $(itId).children(".price").text();
-                    reprice = reprice.split(" ");
-                    reprice = parseInt(reprice[0]);
-                    var recontPric = parseInt($("#cprice").val());
-                    $("#cprice").attr("value", recontPric - reprice + " €");
-                });
-            }
+                $("#citem").attr("value", totIt);
+
+                var reprice = $(itId).children(".price").text();
+                reprice = reprice.split(" ");
+                reprice = parseInt(reprice[0]);
+                var recontPric = parseInt($("#cprice").val());
+                $("#cprice").attr("value", recontPric - reprice + " €");
+
+            });
+
         }
     }
 });
