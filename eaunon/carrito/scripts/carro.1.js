@@ -17,16 +17,14 @@ $(function () {
     $("img[src*='camiseta']").css({ "border-color": "green" });
     */
 
-
-
     var items = document.querySelectorAll(".item");
     for (var i = 0; i < items.length; i++) {
         items[i].addEventListener("dblclick", comprar_articulo, false);
     }
+
     /*
         $(".item").each("dblclick", comprar_articulo, false);
     */
-
 
     function comprar_articulo() {
         var itId = ("#" + this.id);
@@ -69,9 +67,30 @@ $(function () {
                 reprice = parseInt(reprice[0]);
                 var recontPric = parseInt($("#cprice").val());
                 $("#cprice").attr("value", recontPric - reprice + " €");
-
             });
 
+            $("btn_clear").clicks(function () {
+                alert("asdas");
+                btnVac.trigger("click", function () {
+                    $(itId).children(".stock").removeClass("agotado");
+                    var stockY = $(itId).children(".stock").text();
+                    stockY = stockY.split(" ");
+                    stockY = parseInt(stockY[1]);
+                    $(itId).children(".stock").text("Stock " + (parseInt(stockY) + 1));
+                    $(pId).remove();
+                    var itemsC = document.querySelectorAll(".icart");
+                    var totIt = itemsC.length;
+
+                    $("#citem").attr("value", totIt);
+
+                    var reprice = $(itId).children(".price").text();
+                    reprice = reprice.split(" ");
+                    reprice = parseInt(reprice[0]);
+                    var recontPric = parseInt($("#cprice").val());
+                    $("#cprice").attr("value", recontPric - reprice + " €");
+                });
+            });
         }
     }
+
 });
