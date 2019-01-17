@@ -69,26 +69,13 @@ $(function () {
                 $("#cprice").attr("value", recontPric - reprice + " €");
             });
 
-            $("btn_clear").clicks(function () {
-                alert("asdas");
-                btnVac.trigger("click", function () {
-                    $(itId).children(".stock").removeClass("agotado");
-                    var stockY = $(itId).children(".stock").text();
-                    stockY = stockY.split(" ");
-                    stockY = parseInt(stockY[1]);
-                    $(itId).children(".stock").text("Stock " + (parseInt(stockY) + 1));
-                    $(pId).remove();
-                    var itemsC = document.querySelectorAll(".icart");
-                    var totIt = itemsC.length;
+            $("#btn_clear").on("click", function () {
 
-                    $("#citem").attr("value", totIt);
-
-                    var reprice = $(itId).children(".price").text();
-                    reprice = reprice.split(" ");
-                    reprice = parseInt(reprice[0]);
-                    var recontPric = parseInt($("#cprice").val());
-                    $("#cprice").attr("value", recontPric - reprice + " €");
-                });
+                $(pId).remove();
+                $("#cprice .sptext").val("0€")
+                $("#citem .sptext").val("0")
+                $(".stock").removeClass("agotado");
+                $(".item .stock").text("Stock 10");
             });
         }
     }
