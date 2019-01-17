@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <title>DAW</title>
     <link rel="stylesheet" href="css/puzzle.css" />
+    <script src="http://code.jquery.com/jquery-1.9.0.min.js" type="text/javascript"></script>
 
 </head>
 
@@ -16,117 +17,18 @@
     </header>
     <div id="grid">
         <div id="content">
-            <table id="tablPuzz">
-                <tr>
-                    <td id="cell1_1"><img src="img/K-1_1.png"></td>
-                    <td id="cell1_2"><img src="img/K-1_2.png"></td>
-                    <td id="cell1_3"><img src="img/K-1_3.png"></td>
-                    <td id="cell1_4"><img src="img/K-1_4.png"></td>
-                </tr>
-                <tr>
-                    <td id="cell2_1"><img src="img/K-2_1.png"></td>
-                    <td id="cell2_2"><img src="img/K-2_2.png"></td>
-                    <td id="cell2_2"><img src="img/K-2_3.png"></td>
-                    <td id="cell2_4"><img src="img/K-2_4.png"></td>
-                </tr>
-                <tr>
-                    <td id="cell3_1"><img src="img/K-3_1.png"></td>
-                    <td id="cell3_2"><img src="img/K-3_2.png"></td>
-                    <td id="cell3_3"><img src="img/K-3_3.png"></td>
-                    <td id="cell3_4"><img src="img/K-3_4.png"></td>
-                </tr>
-                <tr>
-                    <td id="cell4_1"><img src="img/K-4_1.png"></td>
-                    <td id="cell4_2"><img src="img/K-4_2.png"></td>
-                    <td id="cell4_3"><img src="img/K-4_3.png"></td>
-                    <td id="cell4_4"><img src="img/K-4_4.png"></td>
-                </tr>
-            </table>
-            <table id="tablPuzz">
-                <tr>
-                    <td id="cell1_1"><img src="img/Q-1_1.png"></td>
-                    <td id="cell1_2"><img src="img/Q-1_2.png"></td>
-                    <td id="cell1_3"><img src="img/Q-1_3.png"></td>
-                    <td id="cell1_4"><img src="img/Q-1_4.png"></td>
-                </tr>
-                <tr>
-                    <td id="cell2_1"><img src="img/Q-2_1.png"></td>
-                    <td id="cell2_2"><img src="img/Q-2_2.png"></td>
-                    <td id="cell2_2"><img src="img/Q-2_3.png"></td>
-                    <td id="cell2_4"><img src="img/Q-2_4.png"></td>
-                </tr>
-                <tr>
-                    <td id="cell3_1"><img src="img/Q-3_1.png"></td>
-                    <td id="cell3_2"><img src="img/Q-3_2.png"></td>
-                    <td id="cell3_3"><img src="img/Q-3_3.png"></td>
-                    <td id="cell3_4"><img src="img/Q-3_4.png"></td>
-                </tr>
-                <tr>
-                    <td id="cell4_1"><img src="img/Q-4_1.png"></td>
-                    <td id="cell4_2"><img src="img/Q-4_2.png"></td>
-                    <td id="cell4_3"><img src="img/Q-4_3.png"></td>
-                    <td id="cell4_4"><img src="img/Q-4_4.png"></td>
-                </tr>
-            </table>
-            <table id="tablPuzz">
-                <tr>
-                    <td id="cell1_1"><img src="img/W-1_1.png"></td>
-                    <td id="cell1_2"><img src="img/W-1_2.png"></td>
-                    <td id="cell1_3"><img src="img/W-1_3.png"></td>
-                    <td id="cell1_4"><img src="img/W-1_4.png"></td>
-                </tr>
-                <tr>
-                    <td id="cell2_1"><img src="img/W-2_1.png"></td>
-                    <td id="cell2_2"><img src="img/W-2_2.png"></td>
-                    <td id="cell2_2"><img src="img/W-2_3.png"></td>
-                    <td id="cell2_4"><img src="img/W-2_4.png"></td>
-                </tr>
-                <tr>
-                    <td id="cell3_1"><img src="img/W-3_1.png"></td>
-                    <td id="cell3_2"><img src="img/W-3_2.png"></td>
-                    <td id="cell3_3"><img src="img/W-3_3.png"></td>
-                    <td id="cell3_4"><img src="img/W-3_4.png"></td>
-                </tr>
-                <tr>
-                    <td id="cell4_1"><img src="img/W-4_1.png"></td>
-                    <td id="cell4_2"><img src="img/W-4_2.png"></td>
-                    <td id="cell4_3"><img src="img/W-4_3.png"></td>
-                    <td id="cell4_4"><img src="img/W-4_4.png"></td>
-                </tr>
-            </table>
-            <table id="tablPuzz">
-                <tr>
-                    <td id="cell1_1"><img src="img/H-1_1.png"></td>
-                    <td id="cell1_2"><img src="img/H-1_2.png"></td>
-                    <td id="cell1_3"><img src="img/H-1_3.png"></td>
-                    <td id="cell1_4"><img src="img/H-1_4.png"></td>
-                </tr>
-                <tr>
-                    <td id="cell2_1"><img src="img/H-2_1.png"></td>
-                    <td id="cell2_2"><img src="img/H-2_2.png"></td>
-                    <td id="cell2_2"><img src="img/H-2_3.png"></td>
-                    <td id="cell2_4"><img src="img/H-2_4.png"></td>
-                </tr>
-                <tr>
-                    <td id="cell3_1"><img src="img/H-3_1.png"></td>
-                    <td id="cell3_2"><img src="img/H-3_2.png"></td>
-                    <td id="cell3_3"><img src="img/H-3_3.png"></td>
-                    <td id="cell3_4"><img src="img/H-3_4.png"></td>
-                </tr>
-                <tr>
-                    <td id="cell4_1"><img src="img/H-4_1.png"></td>
-                    <td id="cell4_2"><img src="img/H-4_2.png"></td>
-                    <td id="cell4_3"><img src="img/H-4_3.png"></td>
-                    <td id="cell4_4"><img src="img/H-4_4.png"></td>
-                </tr>
-            </table>
+
+        </div>
+        <div id="gen">
+            <button id="generator">Generate</button>
         </div>
         <div id="ad">
-            publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>
+            publicidad
         </div>
     </div>
 
 </body>
-<script src="js/puzzle.js"></script>
+
+<script src="js/puzzle.js" type="text/javascript"></script>
 
 </html>
