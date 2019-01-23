@@ -30,11 +30,11 @@ $(function () {
 
         -<0>-Realización de un cronómetro que al pulsar sobre la tecla de Jugar se inicie el contador mostrándonos los minutos y segundos transcurridos.
 
-        Solamente las imágenes que tienen un lado en común con el hueco vacío podrán ser desplazadas a ese hueco, el resto no.
+        -Solamente las imágenes que tienen un lado en común con el hueco vacío podrán ser desplazadas a ese hueco, el resto no.
 
-        Cuando se pulse una imagen que no puede ser desplazada al hueco vacío debe haber un cambio de estilo que nos haga entender que esa imagen no puede ser movida, reestableciéndose al cabo de los segundos al estado anterior.
+        -Cuando se pulse una imagen que no puede ser desplazada al hueco vacío debe haber un cambio de estilo que nos haga entender que esa imagen no puede ser movida, reestableciéndose al cabo de los segundos al estado anterior.
 
-        Incluiremos un contador de movimientos que solamente funcione cuando se haya hecho un movimiento correcto.
+        -Incluiremos un contador de movimientos que solamente funcione cuando se haya hecho un movimiento correcto.
 
         Añadiremos 4 botones en los que el usuario podrá elegir 4 imágenes o temáticas diferentes. Cuando se pulse estos botones, el tiempo del reloj se parará. (Al pulsar el botón de inicio de juego esta imagen se desordenará para poder jugar). Uno de ellos tiene que ser fácil de resolver, con números, indicando la posición en la que debe estar(para su fácil corrección).
 
@@ -97,35 +97,65 @@ $(function () {
         }, 10);//cierro el setInterval y le digo que se ejecute cada 10 milisegundos
     }
 
+    var moves = 0;
+    var CurrentPuzzle = "W";
+
+    function adyacente(x, y, eX, eY) {
+
+        if (x == eX && y == eY - 1) {
+            return true;
+        }
+
+        if (x == eX && eY == y - 1) {
+            return true;
+        }
+        if (y == eY && x == eX - 1) {
+            return true;
+        }
+        if (y == eY && eX == x - 1) {
+            return true;
+        }
+        return false;
+
+    }
+
+    $("#content").append('<table id="showTable"><tr><th colspan ="2">Puzzles</th></tr><tr><td><img id="show" src="img/K.png"></td><td><img id="show" src="img/Q.png"></td></tr><tr><td><img id="show" src="img/D.png"></td><td><img id="show" src="img/W.png"></td></tr></table>');
+
     $("#content").append('<table id="tablPuzz"></table>');//creo una tabla en el div con la id content
     $("#generator").on("click", function gene() {//establezco una funcion que se ejecuto cuando haga click en el botton de id generator
         if (first == true) {//creo una condicion que filtre si es la primera vez que se ejecuta el codigo
-
-            timeRestart();//llamo a la funcion que inicia el contador
-
+            $("#showTable").append('<tr><th colspan="2">Pulsa en las imagenes para elegir el puzzle</th></tr>');
+            //timeRestart();//llamo a la funcion que inicia el contador
+            //moves = 0;
+            $('.moves').text("Movimientos: " + moves);
             var pos = ["1_1", "1_2", "1_3", "1_4", "2_1", "2_2", "2_3", "2_4", "3_1", "3_2", "3_3", "3_4", "4_1", "4_2", "4_3", "4_4",];//creo un array con las posiciones de las imagenes
             shuffle(pos);//llamo a la funcion que desordena el array
             var count = 1;//inicio una variable para usarla como contador
             for (var i = 1; i < 5; i++) {//inicio un bucle para generar las filas de la tabla
                 $("#tablPuzz").append('<tr id="row' + i + '"></tr>');//creo la fila de la tabla
                 for (var u = 1; u < 5; u++) {//inicio un bucle para generar las columnas de la tabla
-                    if (u == 4 && i == 4) {//creo una condicion para la ultima posicion de la tabla
-                        $("#row" + i).append('<td id="cell' + i + '_' + u + '"><img src="img/N.png" id="c' + pos[count - 1] + '" class="empt"></td>');//remplazo la ultima posicion de la tabla por una imagen neutra y le añado la clase empt
-                    } else {//para el resto de posiciones
-                        $("#row" + i).append('<td id="cell' + i + '_' + u + '"><img src="img/W-' + pos[count - 1] + '.png" id="c' + pos[count - 1] + '"></td>');//relleno la tabla con las imagenes pasandole como src una imagen del array desordenado y guardo en la id del td la posicion y en la id de la imagen la posicion en la que deberia estar la imagen
-                    }
+                    $("#row" + i).append('<th id="cell' + i + '_' + u + '"><img src="img/N.png" id="c' + pos[count - 1] + '" class="empt"></td>');//remplazo la ultima posicion de la tabla por una imagen neutra y le añado la clase empt
                     count++;//incremento el contador
                 }
             }
-            var images = document.querySelectorAll("img");//selecciono las imagenes creadas en un array
+            var showImg = document.querySelectorAll("#showTable img");
+            for (var i = 0; i < showImg.length; i++) {//creo un bucle que recorra el array de imagenes
+                showImg[i].addEventListener("click", setPuzzle, false);//añado un addeventlistener por cada imagen
+            }
+
+            var images = document.querySelectorAll("th img");//selecciono las imagenes creadas en un array
             for (var i = 0; i < images.length; i++) {//creo un bucle que recorra el array de imagenes
                 images[i].addEventListener("click", replaceIM, false);//añado un addeventlistener por cada imagen
             }
             first = false;//pongo la variable que me indica si es la primera vez que ejecuto el codigo a false
-        } else {//si no es la primera vez que ejecuto el codigo
+            $("#generator").hide();
+        }
+
+        function regenerateTable(param) {
 
             timeRestart();//reinicio el contador
-
+            moves = 0;
+            $('.moves').text("Movimientos: " + moves);
             var pos = ["1_1", "1_2", "1_3", "1_4", "2_1", "2_2", "2_3", "2_4", "3_1", "3_2", "3_3", "3_4", "4_1", "4_2", "4_3", "4_4",];//creo un array con las posiciones de las imagenes
             shuffle(pos);//llamo a la funcion que desordena el array
             var count = 1;//inicio una variable para usarla como contador
@@ -137,7 +167,7 @@ $(function () {
                         $("#cell" + i + "_" + u + " img").attr("id", 'c' + pos[count - 1] + '');//le asigno la id correspondiente
                         $("#cell" + i + "_" + u + " img").attr("class", 'empt');//le añado la clase empt
                     } else {//para el resto de posiciones
-                        $("#cell" + i + "_" + u + " img").attr("src", "img/W-" + pos[count - 1] + ".png");//remplazo la tabla con las imagenes randomizadas
+                        $("#cell" + i + "_" + u + " img").attr("src", "img/" + param + "-" + pos[count - 1] + ".png");//remplazo la tabla con las imagenes randomizadas
                         $("#cell" + i + "_" + u + " img").attr("id", 'c' + pos[count - 1] + '');//les asigno la id correspondiente
                     }
                     count++;//incremento el contador
@@ -145,35 +175,60 @@ $(function () {
             }
         }
 
+        function setPuzzle() {
+            var selec = $("#" + this.id).attr("src");
+            selec = selec.split('');
+            selec = selec[4];
+            alert(selec);
+            if (selec == "W") {
+                CurrentPuzzle = "W";
+            } else if (selec == "K") {
+                CurrentPuzzle = "K";
+            } else if (selec == "D") {
+                CurrentPuzzle = "D";
+            } else if (selec == "Q") {
+                CurrentPuzzle = "Q";
+            }
+            regenerateTable(CurrentPuzzle);
+        }
+
         function replaceIM() {//creo una funcion que permite remplazar imagenes como el puzzle requiere
             var pId = $("#" + this.id).parent().attr("id");
             var id = this.id;
             var empId = $(".empt").attr("id");
-            var arPos = id.split('')
+            var empPPId = $(".empt").parent().attr("id");
+
+            var arPPos = pId.split('');
+            var xPId = arPPos[6];
+            var yPId = arPPos[4];
+
+            var arPEmPos = empPPId.split('');
+            var xEmPId = arPEmPos[6];
+            var yEmPId = arPEmPos[4];
+
+            var arPos = id.split('');
             var posit = arPos[1] + arPos[2] + arPos[3];
 
-            var ids = [pId, id];
-            //alert(ids);
-            //alert(posit);
+            if (adyacente(xPId, yPId, xEmPId, yEmPId) == true) {
+                $("#" + id).addClass("temp");
 
-            $("#" + id).addClass("temp");
+                $(".empt").attr("src", "img/" + CurrentPuzzle + "-" + posit + ".png");
+                $(".empt").attr("id", id);
+                $(".empt").removeClass("empt");
 
-            $(".empt").attr("src", "img/W-" + posit + ".png");
-            $(".empt").attr("id", id);
-            $(".empt").removeClass("empt");
+                $(".temp").attr("src", "img/N.png");
+                $(".temp").addClass("empt");
+                $(".temp").attr("id", empId);
 
-            $(".temp").attr("src", "img/N.png");
-            $(".temp").addClass("empt");
-            $(".temp").attr("id", empId);
+                $(".temp").removeClass("temp");
+                moves++;
+                $('.moves').text("Movimientos: " + moves);
+            } else {
+                $("#" + id).fadeOut(150);
+                $("#" + id).fadeIn(150);
+            }
 
-            $(".temp").removeClass("temp");
-            /*
-            $("#" + id).attr("src", "img/N.png");
-            $(".empt").attr("src", "img/W-" + posit + ".png");
-            $(".empt").removeClass("empt");
-            $("#" + id).addClass("empt");
-            $("#" + id).attr("id", empId);
-            $(".empt").attr("id", id);*/
+
         }
     });
 
