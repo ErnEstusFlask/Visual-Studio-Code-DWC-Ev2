@@ -1,0 +1,51 @@
+<!Doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <title>DAW</title>
+    <link rel="stylesheet" href="css/form.css" />
+    <script src="http://code.jquery.com/jquery-1.9.0.min.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+    <header>
+        <h2>Formulario</h2>
+    </header>
+    <div id="grid">
+        <div id="content">
+            <form>
+                Nombre* <input type="text" size="35" class="obl"><br>
+                Edad <input type="text" size="5"><br>
+                DNI <input type="text" size="9">--<input type="text" size="3"><br>
+                Dirección* <input type="text" size="35" class="obl"><br>
+                Selecciona provincia <select id="provincia">
+                    <option>Provincia</option>
+                    <option>Elige una</option>
+                    <option>Elige una</option>
+                </select><br>
+                Localidad <select id="localidad">
+                    <option>Localidad</option>
+                    <option>Elige una</option>
+                    <option>Elige una</option>
+                </select><br>
+                Código Postal* <input type="text" size="9" class="obl"><br>
+                Télefono de contacto <input type="text" size="10"><br>
+                Correo electrónico <input type="text" size="15"><br>
+                Repita su correo electrónico <input type="text" size="15"><br>
+                (*)Datos obligatorios<br>
+                <input type="submit" value="Enviar los datos">
+                <input type="button" value="Empezar de nuevo">
+            </form>
+
+        </div>
+        <div id="ad">
+            publicidad
+        </div>
+    </div>
+</body>
+
+<script src="js/form.js" type="text/javascript"></script>
+
+</html>

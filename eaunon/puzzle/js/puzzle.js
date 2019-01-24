@@ -36,7 +36,7 @@ $(function () {
 
         -Incluiremos un contador de movimientos que solamente funcione cuando se haya hecho un movimiento correcto.
 
-        Añadiremos 4 botones en los que el usuario podrá elegir 4 imágenes o temáticas diferentes. Cuando se pulse estos botones, el tiempo del reloj se parará. (Al pulsar el botón de inicio de juego esta imagen se desordenará para poder jugar). Uno de ellos tiene que ser fácil de resolver, con números, indicando la posición en la que debe estar(para su fácil corrección).
+        -<0>-Añadiremos 4 botones en los que el usuario podrá elegir 4 imágenes o temáticas diferentes. Cuando se pulse estos botones, el tiempo del reloj se parará. (Al pulsar el botón de inicio de juego esta imagen se desordenará para poder jugar). Uno de ellos tiene que ser fácil de resolver, con números, indicando la posición en la que debe estar(para su fácil corrección).
 
         Añadiremos una función de ayuda, donde daremos la opción de gastar un comodín al usuario que le permita desplazar una imagen aunque esta no sea adyacente. (Por ejemplo: al hacer doble click en una imagen si el contador de comodines sigue en 1, te permite hacer el cambio, si no, te indica que no es posible).
 
@@ -94,11 +94,12 @@ $(function () {
             }
             $('.timer').text(h + ":" + m + ":" + s + ":" + ms);//muestro en pantalla las horas minutos segundos y milisegundos en el div de etiqueta timer
             ms++;//incremento los milisegundos
-        }, 10);//cierro el setInterval y le digo que se ejecute cada 10 milisegundos
+        }, 10);//cierro el setInterval y le digo que se ejecute cada 10 milisegundos  
     }
 
     var moves = 0;
-    var CurrentPuzzle = "W";
+    var comod = 3;
+    var CurrentPuzzle = "";
 
     function adyacente(x, y, eX, eY) {
 
@@ -119,12 +120,12 @@ $(function () {
 
     }
 
-    $("#content").append('<table id="showTable"><tr><th colspan ="2">Puzzles</th></tr><tr><td><img id="show" src="img/K.png"></td><td><img id="show" src="img/Q.png"></td></tr><tr><td><img id="show" src="img/D.png"></td><td><img id="show" src="img/W.png"></td></tr></table>');
+    $("#content").append('<table id="showTable"><tr><tr><th>Nivel 1</th><th>Nivel 2</th></tr><tr><td><img id="W" class="show" src="img/W.png"></td><td><img id="Q" class="show" src="img/Q.png"></td><tr><th>Nivel 3</th><th>Nivel 4</th></tr></tr><tr><td><img id="D" class="show" src="img/D.png"></td><td><img id="K" class="show" src="img/K.png"></td></tr></table>');
 
     $("#content").append('<table id="tablPuzz"></table>');//creo una tabla en el div con la id content
     $("#generator").on("click", function gene() {//establezco una funcion que se ejecuto cuando haga click en el botton de id generator
         if (first == true) {//creo una condicion que filtre si es la primera vez que se ejecuta el codigo
-            $("#showTable").append('<tr><th colspan="2">Pulsa en las imagenes para elegir el puzzle</th></tr>');
+            $("#showTable").append('<tr><th colspan="2" border="1px solid black">Pulsa en las imagenes para elegir el puzzle</th></tr>');
             //timeRestart();//llamo a la funcion que inicia el contador
             //moves = 0;
             $('.moves').text("Movimientos: " + moves);
@@ -138,7 +139,7 @@ $(function () {
                     count++;//incremento el contador
                 }
             }
-            var showImg = document.querySelectorAll("#showTable img");
+            var showImg = document.querySelectorAll("td img");
             for (var i = 0; i < showImg.length; i++) {//creo un bucle que recorra el array de imagenes
                 showImg[i].addEventListener("click", setPuzzle, false);//añado un addeventlistener por cada imagen
             }
@@ -146,9 +147,11 @@ $(function () {
             var images = document.querySelectorAll("th img");//selecciono las imagenes creadas en un array
             for (var i = 0; i < images.length; i++) {//creo un bucle que recorra el array de imagenes
                 images[i].addEventListener("click", replaceIM, false);//añado un addeventlistener por cada imagen
+                images[i].addEventListener("dblclick", como, false);//añado un addeventlistener por cada imagen
             }
             first = false;//pongo la variable que me indica si es la primera vez que ejecuto el codigo a false
-            $("#generator").hide();
+            $("#generator").hide();//oculto el boton que genera la tabla
+
         }
 
         function regenerateTable(param) {
@@ -156,6 +159,7 @@ $(function () {
             timeRestart();//reinicio el contador
             moves = 0;
             $('.moves').text("Movimientos: " + moves);
+            $('.comodin').text("Comodin: " + comod);
             var pos = ["1_1", "1_2", "1_3", "1_4", "2_1", "2_2", "2_3", "2_4", "3_1", "3_2", "3_3", "3_4", "4_1", "4_2", "4_3", "4_4",];//creo un array con las posiciones de las imagenes
             shuffle(pos);//llamo a la funcion que desordena el array
             var count = 1;//inicio una variable para usarla como contador
@@ -177,21 +181,46 @@ $(function () {
 
         function setPuzzle() {
             var selec = $("#" + this.id).attr("src");
-            selec = selec.split('');
-            selec = selec[4];
-            alert(selec);
-            if (selec == "W") {
+            var arselec = selec.split('');
+            var lett = arselec[4];
+            if (lett == "W") {
                 CurrentPuzzle = "W";
-            } else if (selec == "K") {
+            } else if (lett == "K") {
                 CurrentPuzzle = "K";
-            } else if (selec == "D") {
+            } else if (lett == "D") {
                 CurrentPuzzle = "D";
-            } else if (selec == "Q") {
+            } else if (lett == "Q") {
                 CurrentPuzzle = "Q";
             }
             regenerateTable(CurrentPuzzle);
         }
+        function como() {
+            if (comod > 0) {
+                var id = this.id;
+                var empId = $(".empt").attr("id");
+                var arPos = id.split('');
+                var posit = arPos[1] + arPos[2] + arPos[3];
 
+                $("#" + id).addClass("temp");
+
+                $(".empt").attr("src", "img/" + CurrentPuzzle + "-" + posit + ".png");
+                $(".empt").attr("id", id);
+                $(".empt").removeClass("empt");
+
+                $(".temp").attr("src", "img/N.png");
+                $(".temp").addClass("empt");
+                $(".temp").attr("id", empId);
+
+                $(".temp").removeClass("temp");
+                moves++;
+                $('.moves').text("Movimientos: " + moves);
+                comod--;
+                $('.comodin').text("Comodin: " + comod);
+            } else {
+
+            }
+
+        }
         function replaceIM() {//creo una funcion que permite remplazar imagenes como el puzzle requiere
             var pId = $("#" + this.id).parent().attr("id");
             var id = this.id;

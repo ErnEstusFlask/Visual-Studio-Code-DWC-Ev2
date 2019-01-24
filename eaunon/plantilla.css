@@ -46,27 +46,3 @@ h2{
     right: 0;
     color: white;
 }
-#gen{
-    grid-column: 1;
-    grid-row: 2;
-}
-
-#tablPuzz{
-    border-collapse: collapse;
-    border: 3px solid rgb(32, 27, 17);
-}
-#showTable{
-    float: right;
-    border-collapse: collapse;
-    border: 3px solid rgb(32, 27, 17);
-}
-#tablPuzz th, td{
-    margin: 1px;
-    border: 3px solid rgb(32, 27, 17);
-}
-img{
-    width: 95px;
-}
-.show{
-    width: 190px;
-}
