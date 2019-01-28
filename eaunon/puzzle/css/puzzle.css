@@ -56,6 +56,7 @@ h2{
     border: 3px solid rgb(32, 27, 17);
 }
 #showTable{
+    max-width: 393px;
     float: right;
     border-collapse: collapse;
     border: 3px solid rgb(32, 27, 17);
@@ -69,4 +70,13 @@ img{
 }
 .show{
     width: 190px;
+}
+
+#helpImg{
+    width:400px;
+    margin: 30px;
+    float: right ;
+}
+.hider{
+    display: none;
 }

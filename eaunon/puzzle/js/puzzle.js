@@ -38,9 +38,9 @@ $(function () {
 
         -<0>-Añadiremos 4 botones en los que el usuario podrá elegir 4 imágenes o temáticas diferentes. Cuando se pulse estos botones, el tiempo del reloj se parará. (Al pulsar el botón de inicio de juego esta imagen se desordenará para poder jugar). Uno de ellos tiene que ser fácil de resolver, con números, indicando la posición en la que debe estar(para su fácil corrección).
 
-        Añadiremos una función de ayuda, donde daremos la opción de gastar un comodín al usuario que le permita desplazar una imagen aunque esta no sea adyacente. (Por ejemplo: al hacer doble click en una imagen si el contador de comodines sigue en 1, te permite hacer el cambio, si no, te indica que no es posible).
+        -Añadiremos una función de ayuda, donde daremos la opción de gastar un comodín al usuario que le permita desplazar una imagen aunque esta no sea adyacente. (Por ejemplo: al hacer doble click en una imagen si el contador de comodines sigue en 1, te permite hacer el cambio, si no, te indica que no es posible).
 
-        Incluiremos una imagen en miniatura a modo ejemplo del puzzle que estamos realizando. Habrá un botón para que el usuario oculte la ayuda o la muestre cuando lo desee.
+        -Incluiremos una imagen en miniatura a modo ejemplo del puzzle que estamos realizando. Habrá un botón para que el usuario oculte la ayuda o la muestre cuando lo desee.
 
         Cuando completamos el juego porque todas las imágenes están en su lugar correspondiente, debe pararse el tiempo y bloquearse los movimientos del juego.
 
@@ -56,6 +56,8 @@ $(function () {
     */
 
     var first = true; //creo una variable que determine si es la primera vez que ejecuto el codigo
+
+    var completed = ["no", "no", "no", "no", "no", "no", "no", "no", "no", "no", "no", "no", "no", "no", "no", "no"];
 
     function shuffle(a) {//inicio una funcion que me permite desordenar arrays
         var j, x, i;//creo varaibles para la funcion
@@ -120,46 +122,64 @@ $(function () {
 
     }
 
+    $("#help").on("click", function helper() {
+        var letter = $("#cell1_1 img").attr("src");
+        letter = letter.split('');
+        letter = letter[4];
+        if (first == true) {
+            $('<img id="helpImg" src="img/' + letter + '.png">').insertAfter('#showTable');
+            first = false;
+        } else {
+            $("#helpImg").attr("src", 'img/' + letter + '.png');
+            $("#helpImg").toggleClass("hider");
+        }
+    });
+
+    $("#help").hide();
+
     $("#content").append('<table id="showTable"><tr><tr><th>Nivel 1</th><th>Nivel 2</th></tr><tr><td><img id="W" class="show" src="img/W.png"></td><td><img id="Q" class="show" src="img/Q.png"></td><tr><th>Nivel 3</th><th>Nivel 4</th></tr></tr><tr><td><img id="D" class="show" src="img/D.png"></td><td><img id="K" class="show" src="img/K.png"></td></tr></table>');
 
     $("#content").append('<table id="tablPuzz"></table>');//creo una tabla en el div con la id content
+
     $("#generator").on("click", function gene() {//establezco una funcion que se ejecuto cuando haga click en el botton de id generator
-        if (first == true) {//creo una condicion que filtre si es la primera vez que se ejecuta el codigo
-            $("#showTable").append('<tr><th colspan="2" border="1px solid black">Pulsa en las imagenes para elegir el puzzle</th></tr>');
-            //timeRestart();//llamo a la funcion que inicia el contador
-            //moves = 0;
-            $('.moves').text("Movimientos: " + moves);
-            var pos = ["1_1", "1_2", "1_3", "1_4", "2_1", "2_2", "2_3", "2_4", "3_1", "3_2", "3_3", "3_4", "4_1", "4_2", "4_3", "4_4",];//creo un array con las posiciones de las imagenes
-            shuffle(pos);//llamo a la funcion que desordena el array
-            var count = 1;//inicio una variable para usarla como contador
-            for (var i = 1; i < 5; i++) {//inicio un bucle para generar las filas de la tabla
-                $("#tablPuzz").append('<tr id="row' + i + '"></tr>');//creo la fila de la tabla
-                for (var u = 1; u < 5; u++) {//inicio un bucle para generar las columnas de la tabla
-                    $("#row" + i).append('<th id="cell' + i + '_' + u + '"><img src="img/N.png" id="c' + pos[count - 1] + '" class="empt"></td>');//remplazo la ultima posicion de la tabla por una imagen neutra y le añado la clase empt
-                    count++;//incremento el contador
-                }
+        //if (first == true) {//creo una condicion que filtre si es la primera vez que se ejecuta el codigo
+        $("#showTable").append('<tr><th colspan="2" border="1px solid black">Pulsa en las imagenes para elegir el puzzle</th></tr>');
+        //timeRestart();//llamo a la funcion que inicia el contador
+        //moves = 0;
+        $('.moves').text("Movimientos: " + moves);
+        var pos = ["1_1", "1_2", "1_3", "1_4", "2_1", "2_2", "2_3", "2_4", "3_1", "3_2", "3_3", "3_4", "4_1", "4_2", "4_3", "4_4",];//creo un array con las posiciones de las imagenes
+        shuffle(pos);//llamo a la funcion que desordena el array
+        var count = 1;//inicio una variable para usarla como contador
+        for (var i = 1; i < 5; i++) {//inicio un bucle para generar las filas de la tabla
+            $("#tablPuzz").append('<tr id="row' + i + '"></tr>');//creo la fila de la tabla
+            for (var u = 1; u < 5; u++) {//inicio un bucle para generar las columnas de la tabla
+                $("#row" + i).append('<th id="cell' + i + '_' + u + '"><img src="img/N.png" id="c' + pos[count - 1] + '" class="empt"></td>');//remplazo la ultima posicion de la tabla por una imagen neutra y le añado la clase empt
+                count++;//incremento el contador
             }
-            var showImg = document.querySelectorAll("td img");
-            for (var i = 0; i < showImg.length; i++) {//creo un bucle que recorra el array de imagenes
-                showImg[i].addEventListener("click", setPuzzle, false);//añado un addeventlistener por cada imagen
-            }
-
-            var images = document.querySelectorAll("th img");//selecciono las imagenes creadas en un array
-            for (var i = 0; i < images.length; i++) {//creo un bucle que recorra el array de imagenes
-                images[i].addEventListener("click", replaceIM, false);//añado un addeventlistener por cada imagen
-                images[i].addEventListener("dblclick", como, false);//añado un addeventlistener por cada imagen
-            }
-            first = false;//pongo la variable que me indica si es la primera vez que ejecuto el codigo a false
-            $("#generator").hide();//oculto el boton que genera la tabla
-
+        }
+        var showImg = document.querySelectorAll("td img");
+        for (var i = 0; i < showImg.length; i++) {//creo un bucle que recorra el array de imagenes
+            showImg[i].addEventListener("click", setPuzzle, false);//añado un addeventlistener por cada imagen
         }
 
-        function regenerateTable(param) {
+        var images = document.querySelectorAll("th img");//selecciono las imagenes creadas en un array
+        for (var i = 0; i < images.length; i++) {//creo un bucle que recorra el array de imagenes
+            images[i].addEventListener("click", replaceIM, false);//añado un addeventlistener por cada imagen
+            images[i].addEventListener("dblclick", como, false);//añado un addeventlistener por cada imagen
+        }
+        //first = false;//pongo la variable que me indica si es la primera vez que ejecuto el codigo a false
+        $("#generator").hide();//oculto el boton que genera la tabla
 
+        //}
+
+        function regenerateTable(param) {
+            $("#helpImg").addClass("hider");
             timeRestart();//reinicio el contador
             moves = 0;
+            comod = 3;
+            $("#help").show();
             $('.moves').text("Movimientos: " + moves);
-            $('.comodin').text("Comodin: " + comod);
+            $('.comodin').text("Comodin: " + comod + " (Para gastar un comodin haz dobleclik en la imagen deseada)");
             var pos = ["1_1", "1_2", "1_3", "1_4", "2_1", "2_2", "2_3", "2_4", "3_1", "3_2", "3_3", "3_4", "4_1", "4_2", "4_3", "4_4",];//creo un array con las posiciones de las imagenes
             shuffle(pos);//llamo a la funcion que desordena el array
             var count = 1;//inicio una variable para usarla como contador
@@ -195,7 +215,7 @@ $(function () {
             regenerateTable(CurrentPuzzle);
         }
         function como() {
-            if (comod > 0) {
+            if (true) {
                 var id = this.id;
                 var empId = $(".empt").attr("id");
                 var arPos = id.split('');
@@ -216,11 +236,46 @@ $(function () {
                 $('.moves').text("Movimientos: " + moves);
                 comod--;
                 $('.comodin').text("Comodin: " + comod);
-            } else {
 
+                compruebaCompletado();
+
+            } else {
+                alert("No te quedan comodines")
             }
 
         }
+
+        function compruebaCompletado() {
+            var contComp = 0;
+            for (var u = 1; u < 5; u++) {
+                for (var w = 1; w < 5; w++) {
+                    var cellID = $("#c" + u + "_" + w).parent().attr("id");
+                    cellID = cellID.split('');
+                    cellID = cellID[4] + cellID[5] + cellID[6];
+                    var imgID = $("#c" + u + "_" + w).attr("id");
+                    imgID = imgID.split('');
+                    imgID = imgID[1] + imgID[2] + imgID[3];
+                    if (cellID == imgID) {
+                        completed[contComp] = "yes";
+                    } else {
+                        completed[contComp] = "no";
+                    }
+                    contComp++;
+                }
+            }
+            var contW = 0;
+            while (contW < 16) {
+                if (completed[contW] == "no") {
+                    contW = 16;
+                }
+                contW++;
+            }
+            if (completed[0] == "yes" && completed[1] == "yes" && completed[2] == "yes" && completed[3] == "yes" && completed[4] == "yes" && completed[5] == "yes" && completed[6] == "yes" && completed[7] == "yes" && completed[8] == "yes" && completed[9] == "yes" && completed[10] == "yes" && completed[11] == "yes" && completed[12] == "yes" && completed[13] == "yes" && completed[14] == "yes" && completed[15] == "yes") {
+
+                alert("A WINNER IS YOU");
+            }
+        }
+
         function replaceIM() {//creo una funcion que permite remplazar imagenes como el puzzle requiere
             var pId = $("#" + this.id).parent().attr("id");
             var id = this.id;
@@ -257,7 +312,7 @@ $(function () {
                 $("#" + id).fadeIn(150);
             }
 
-
+            compruebaCompletado();
         }
     });
 

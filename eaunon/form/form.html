@@ -15,28 +15,28 @@
     </header>
     <div id="grid">
         <div id="content">
-            <form>
-                Nombre* <input type="text" size="35" class="obl"><br>
-                Edad <input type="text" size="5"><br>
-                DNI <input type="text" size="9">--<input type="text" size="3"><br>
-                Dirección* <input type="text" size="35" class="obl"><br>
+            <form id="formA">
+                Nombre* <input type="text" size="35" value="" required><br>
+                Edad <input type="text" size="5" name="age" value=""><br>
+                DNI <input type="text" size="9" name="dni" value="" name="direccion" vlaue="" required>--<input type="text"
+                    size="3" name="lett" value=""><br>
+                Dirección* <input type="text" size="35" name="direc" id="direc"><br>
                 Selecciona provincia <select id="provincia">
-                    <option>Provincia</option>
-                    <option>Elige una</option>
-                    <option>Elige una</option>
+                    <option value="elige">Elige una</option>
+                    <option value="Valencia">Valencia</option>
+                    <option value="Castellón">Castellón</option>
+                    <option value="Alicante">Alicante</option>
                 </select><br>
-                Localidad <select id="localidad">
-                    <option>Localidad</option>
-                    <option>Elige una</option>
-                    <option>Elige una</option>
+                Localidad <select id="localidad" name="localidad" disabled>
+
                 </select><br>
-                Código Postal* <input type="text" size="9" class="obl"><br>
-                Télefono de contacto <input type="text" size="10"><br>
-                Correo electrónico <input type="text" size="15"><br>
-                Repita su correo electrónico <input type="text" size="15"><br>
+                Código Postal* <input type="text" size="9" name="cp" value="" required><br>
+                Télefono de contacto <input type="text" size="10" name="tl" value=""><br>
+                Correo electrónico <input type="text" size="15" name="mail" id="mail" value=""><br>
+                Repita su correo electrónico <input type="text" size="15" name="mail2" value=""><br>
                 (*)Datos obligatorios<br>
-                <input type="submit" value="Enviar los datos">
-                <input type="button" value="Empezar de nuevo">
+                <input type="submit" value="Enviar los datos" id="sub">
+                <input type="button" value="Empezar de nuevo" id="clear">
             </form>
 
         </div>

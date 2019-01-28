@@ -13,18 +13,98 @@ $(function () {
     Debe haber un botón que hace que el formulario se reinicie.
     En el caso de que esté todo correcto, en la barra de direcciones tendrán que aparecer los datos enviados, pero si hay algún error de cumplimentación NO.*/
 
-    var text = document.querySelectorAll(".obl")
+    var form = document.getElementById("formA");
+    var fAge = form.age;
+    var fDni = form.dni;
+    var fLett = form.lett;
+    var fTl = form.tl;
+    var fMail = form.mail;
+    var fMail2 = form.mail2;
 
-    for (var i = 0; i < text.length; i++) {
-        text[i].addEventListener("blur", function () {
-            alert("gfasd");
-            $("#" + this.id).attr("border", "solid 1px red");
-        });
+
+    form.addEventListener("submit", check);
+
+
+    function check(param) {
+        if (fDni.value != "") {
+            var dni = fDni.value + fLett.value;
+            var checkDni = /^\d{8}[a-zA-Z]$/;
+            var n;
+            var l;
+            var letter;
+
+            if (checkDni.test(dni) == true) {
+                n = dni.substr(0, dni.length - 1);
+                l = dni.substr(dni.length - 1, 1);
+                n = n % 23;
+                letter = 'TRWAGMYFPDXBNJZSQVHLCKE';//---
+                letter = letter.substring(n, n + 1);
+                if (letter != l.toUpperCase()) {
+                    alert('ERROR: La letra del DNI no se corresponde');
+                    param.preventDefault();
+                } else {
+                    return true;
+                }
+            } else {
+                alert('DNI erróneo');
+                param.preventDefault();
+                return false;
+            }
+        }
+        if (fAge.value != "" || fAge.value < 100 || fAge.value > 18) {
+            if (isNaN(fAge.value)) {
+                alert("Inserte un formato númerico valido");
+                param.preventDefault();
+            }
+        }
+        if (fTl.value != "") {
+            if (isNaN(fTl.value) || fTl.value.length != 9) {
+                alert("Inserte un teléfono válido");
+                param.preventDefault();
+            }
+        }
+
+        if (fMail.value != "") {
+            if (fMail.value != fMail2.value) {
+                alert("Los correos no coinciden");
+                param.preventDefault();
+
+            } else {
+                var cont = fMail.value;
+                if (cont.includes("@")) {
+
+                } else {
+                    alert("Inserte un correo válido");
+                    param.preventDefault();
+                }
+
+            }
+        }
+
     }
 
     $("#provincia").change(function () {
-        alert($(this).val());
-    })
+        var prov = $(this).val();
+        if (prov == "Alicante") {
+            $("#localidad").attr("disabled", false);
+            $("#localidad").text("");
+            $("#localidad").append("<option value='Benferri'>Benferri</option><option value='Alcoi'>Alcoi</option><option value='Benidorm'>Benidorm</option>");
+        } else if (prov == "Castellón") {
+            $("#localidad").attr("disabled", false);
+            $("#localidad").text("");
+            $("#localidad").append("<option value='Jerica'>Jerica</option><option value='Villa-real'>Villa-real</option><option value='Betxí'>Betxí</option>");
+        } else if (prov == "Valencia") {
+            $("#localidad").attr("disabled", false);
+            $("#localidad").text("");
+            $("#localidad").append("<option value='Catarrotja'>Catarrotja</option><option value='Albal'>Albal</option><option value='Massanassa'>Massanassa</option>");
+        } else if (prov == "elige") {
+            $("#localidad").attr("disabled", true);
+            $("#localidad").text("");
+        }
+    });
 
+    if (oCorreo.value != oCorreo2.value) {
+        oCorreo2.focus();
+    }
 
 });
