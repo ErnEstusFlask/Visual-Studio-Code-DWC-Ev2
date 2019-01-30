@@ -1,56 +1,6 @@
 $(function () {
-    /*
-        Realización de un juego de un puzzle con ayuda de lo visto en clase. 
-
-        ⦁    No se podrá utilizar las etiquetas <avg> ni <canvas>.
-
-        ⦁    En el archivo .html únicamente estarán:
-
-            1.    los botones
-
-            2.    las etiquetas del reloj 
-
-            3.    las etiquetas del contador de movimientos.
-
-        ⦁     El recorte de las imágenes se podrá realizar con alguna herramienta online.
-
-        -Aparición de una tabla de 4x4 al pulsar un botón, gestionada por javascript.
-
-        -Los trozos de imágenes deben aparecer ordenados en cada una de las celdas haciendo uso de javascript y JQuery.
-
-        -Los trozos de imágenes tienen que ser de 95px X 95px
-
-        -Los trozos de imágenes deben aparecer desordenados aleatoriamente en cada una de las celdas haciendo uso de javascript y jquery.
-
-        -Cuando comienza el juego, una de las casillas no deberá contener imagen o si la contiene esta será del color de fondo  y no tiene que ser necesariamente la misma en todos los inicios (ni la misma imagen ni la misma posición en la tabla).
-
-        -Al pulsar sobre cada una de las imágenes, estas tienen que devolver el identificador de la imagen, del sitio en el que están y del sitio al que tienen que ir.(eventualmente para posteriormente poder trabajar con ello)
-
-        -Al pulsar sobre una imagen, esta tiene que desaparecer dejando el hueco y aparecer en el hueco que estaba vacío.
-
+    s/*
         -<0>-Realización de un cronómetro que al pulsar sobre la tecla de Jugar se inicie el contador mostrándonos los minutos y segundos transcurridos.
-
-        -Solamente las imágenes que tienen un lado en común con el hueco vacío podrán ser desplazadas a ese hueco, el resto no.
-
-        -Cuando se pulse una imagen que no puede ser desplazada al hueco vacío debe haber un cambio de estilo que nos haga entender que esa imagen no puede ser movida, reestableciéndose al cabo de los segundos al estado anterior.
-
-        -Incluiremos un contador de movimientos que solamente funcione cuando se haya hecho un movimiento correcto.
-
-        -<0>-Añadiremos 4 botones en los que el usuario podrá elegir 4 imágenes o temáticas diferentes. Cuando se pulse estos botones, el tiempo del reloj se parará. (Al pulsar el botón de inicio de juego esta imagen se desordenará para poder jugar). Uno de ellos tiene que ser fácil de resolver, con números, indicando la posición en la que debe estar(para su fácil corrección).
-
-        -Añadiremos una función de ayuda, donde daremos la opción de gastar un comodín al usuario que le permita desplazar una imagen aunque esta no sea adyacente. (Por ejemplo: al hacer doble click en una imagen si el contador de comodines sigue en 1, te permite hacer el cambio, si no, te indica que no es posible).
-
-        -Incluiremos una imagen en miniatura a modo ejemplo del puzzle que estamos realizando. Habrá un botón para que el usuario oculte la ayuda o la muestre cuando lo desee.
-
-        -Cuando completamos el juego porque todas las imágenes están en su lugar correspondiente, debe pararse el tiempo y bloquearse los movimientos del juego.
-
-        -Aparecerá una pantalla emergente que debe indicarnos cuánto tiempo hemos tardado y los movimientos que hemos realizado, felicitándonos por haberlo conseguido.
-
-        Comentamos TODO el código javascript explicando qué hace cada línea.
-
-        -Comprobar que en la consola no aparecen mensajes de error. Si es así, hay que corregirlos.
-
-        -Comprobar que, con distintos navegadores, la página se ejecuta correctamente.
 
         Solucionar, delante del profesor, el juego en menos de 500 pasos.
     */
@@ -169,10 +119,7 @@ $(function () {
             images[i].addEventListener("click", replaceIM, false);//añado un addeventlistener por cada imagen
             images[i].addEventListener("dblclick", como, false);//añado un addeventlistener por cada imagen
         }
-        //first = false;//pongo la variable que me indica si es la primera vez que ejecuto el codigo a false
         $("#generator").hide();//oculto el boton que genera la tabla
-
-        //}
 
         function regenerateTable(param) {//creo una funcion que genera la tabla con el puzzle indicado
             $("#helpImg").addClass("hider");//escondo la imagen de ayuda en caso de que se muestre
@@ -278,39 +225,39 @@ $(function () {
             if (win == false) {//si el puzzle no se ha resuelto
                 var pId = $("#" + this.id).parent().attr("id");//almaceno la id del padre
                 var id = this.id;//almaceno la id
-                var empId = $(".empt").attr("id");//
-                var empPPId = $(".empt").parent().attr("id");
+                var empId = $(".empt").attr("id");//almaceno la id de la celda vacia
+                var empPPId = $(".empt").parent().attr("id");//almaceno la id del padre de la celda vacia
 
-                var arPPos = pId.split('');
-                var xPId = arPPos[6];
-                var yPId = arPPos[4];
+                var arPPos = pId.split('');//convierto la id del padre de la imagen en array
+                var xPId = arPPos[6];//alamceno la coordenada x
+                var yPId = arPPos[4];//alamceno la coordenada y
 
-                var arPEmPos = empPPId.split('');
-                var xEmPId = arPEmPos[6];
-                var yEmPId = arPEmPos[4];
+                var arPEmPos = empPPId.split('');//convierto la id del padre de la celda vacia en array
+                var xEmPId = arPEmPos[6];//alamceno la coordenada x
+                var yEmPId = arPEmPos[4];//alamceno la coordenada y
 
-                var arPos = id.split('');
-                var posit = arPos[1] + arPos[2] + arPos[3];
+                var arPos = id.split('');//convierto la id de la imagen en array
+                var posit = arPos[1] + arPos[2] + arPos[3];//guardo los caracteres que me indican la posicion
 
-                if (adyacente(xPId, yPId, xEmPId, yEmPId) == true) {
-                    $("#" + id).addClass("temp");
+                if (adyacente(xPId, yPId, xEmPId, yEmPId) == true) {//llamo la funcion que me indica si una celda es adyacente a otra segun sus coordenadas
+                    $("#" + id).addClass("temp");//añado una clase temporal a la imagen seleccionada
 
-                    $(".empt").attr("src", "img/" + CurrentPuzzle + "-" + posit + ".png");
-                    $(".empt").attr("id", id);
-                    $(".empt").removeClass("empt");
+                    $(".empt").attr("src", "img/" + CurrentPuzzle + "-" + posit + ".png");//le remplazo el src por el de la imagen deseada
+                    $(".empt").attr("id", id);//le cambio la id
+                    $(".empt").removeClass("empt");//le quito la clase que indica que esta vacio
 
-                    $(".temp").attr("src", "img/N.png");
-                    $(".temp").addClass("empt");
-                    $(".temp").attr("id", empId);
+                    $(".temp").attr("src", "img/N.png");//le remplazo el src por el de la imagen deseada
+                    $(".temp").addClass("empt");//le añado la clase que indica que esta vacio
+                    $(".temp").attr("id", empId);//le cambio la id
 
-                    $(".temp").removeClass("temp");
-                    moves++;
-                    $('.moves').text("Movimientos: " + moves);
-                } else {
-                    $("#" + id).fadeOut(150);
-                    $("#" + id).fadeIn(150);
+                    $(".temp").removeClass("temp");//elimino la clase temp de quien la tenga
+                    moves++;//incremento los movimientos
+                    $('.moves').text("Movimientos: " + moves);//actualizo los movimientos
+                } else {//si no
+                    $("#" + id).fadeOut(150);//añado un efecto de fadeOut para indicar que la imagen no puede ser deplazada
+                    $("#" + id).fadeIn(150);//añado un efecto de fadeIn para indicar que la imagen no puede ser deplazada
                 }
-                compruebaCompletado();
+                compruebaCompletado();//compruebo si el puzzle se ha completado
             }
         }
     });
