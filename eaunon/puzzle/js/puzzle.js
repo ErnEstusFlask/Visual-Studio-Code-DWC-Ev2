@@ -1,14 +1,9 @@
 $(function () {
-    s/*
-        -<0>-Realización de un cronómetro que al pulsar sobre la tecla de Jugar se inicie el contador mostrándonos los minutos y segundos transcurridos.
-
-        Solucionar, delante del profesor, el juego en menos de 500 pasos.
-    */
 
     var tim;//creo una variable en la que almacenare el setinterval
     var win = false;//creo una variable que determine si el puzzle ha sido completado
     var first = true; //creo una variable que determine si es la primera vez que ejecuto el codigo
-
+    var set = false;//creo una variable que indique si el interval esta creado
     var completed = ["no", "no", "no", "no", "no", "no", "no", "no", "no", "no", "no", "no", "no", "no", "no", "no"];//creo un array que indique si cada imagen esta en posicion correcta
 
     function shuffle(a) {//inicio una funcion que me permite desordenar arrays
@@ -29,6 +24,7 @@ $(function () {
 
     function timeRestart() {//creo una variable para reiniciar el contador
         clearInterval(tim);//elimino el intervalo previo
+        set = true;//indico que el intervalo ha sido creado
         h = 0;//reseteo a 0 las horas
         m = 0;//reseteo a 0 los minutos
         s = 0;//reseteo a 0 los segundos
@@ -52,7 +48,7 @@ $(function () {
     }
 
     var moves = 0;//creo una variable que indique el numero de movimientos
-    var comod = 3;//creo una variable que indique el numero de comodines
+    var comod = 1;//creo una variable que indique el numero de comodines
     var CurrentPuzzle = "";//creo una variable que guarde el puzzle seleccionado
 
     function adyacente(x, y, eX, eY) {//creo una funcion que determine si una celda es adyacente a otra
@@ -87,9 +83,40 @@ $(function () {
         }
     });
 
+    $("#pause").on("click", function timePause() {//creo una variable para pausar el contador
+        if (set == true) {//si el interval esta creado
+            clearInterval(tim);//elimino el intervalo
+            $("#tablPuzz").hide();//escondo la tabla para que el jugador no haga trampas
+            win = true;//hago creer que el puzzle ha sido completado para que mientras esta pausado no se puedan realizar movimientos
+            set = false;//indico que el intervalo se ha eliminado
+        } else {//si no
+            tim = setInterval(function () { //establezco un intervalo que ejecute una funcion
+                if (ms == 100) {//creo una condicion que se ejecuta cuando los milisegundos llegan a 100
+                    s++;//incremento los segundos
+                    ms = 0;//reinicio los milisegundos a 0
+                }
+                if (s == 60) {//creo una condicion que se ejecuta cuando los segundos llegan a 60
+                    m++;//incremento los minutos
+                    s = 0;//reinicio los segundos a 0
+                }
+                if (m == 60) {//creo una condicion que se ejecuta cuando los minutos llegan a 60
+                    h++;//incremento las horas
+                    m = 0;//reinicio los minutos a 0
+                }
+                $('.timer').text(h + ":" + m + ":" + s + ":" + ms);//muestro en pantalla las horas minutos segundos y milisegundos en el div de etiqueta timer
+                ms++;//incremento los milisegundos
+            }, 10);//cierro el setInterval y le digo que se ejecute cada 10 milisegundos  
+            set = true;//indico que el intervalo se ha creado
+            win = false;//hago creer que el puzzle no ha sido completado para que puedar retomar el juego
+            $("#tablPuzz").show();//vuelvo a mostrar la tabla
+        }
+    });
+
     $("#help").hide();//escondo el boton de ayuda
 
-    $("#content").append('<table id="showTable"><tr><tr><th>Nivel 1</th><th>Nivel 2</th></tr><tr><td><img id="W" class="show" src="img/W.png"></td><td><img id="Q" class="show" src="img/Q.png"></td><tr><th>Nivel 3</th><th>Nivel 4</th></tr></tr><tr><td><img id="D" class="show" src="img/D.png"></td><td><img id="K" class="show" src="img/K.png"></td></tr></table>');//añado la tabla para seleccionar los puzzles
+    $("#pause").hide();//escondo el boton de pausa
+
+    $("#content").append('<table id="showTable"><tr><th>Nivel 1</th><th>Nivel 2</th></tr><tr><td><img id="W" class="show" src="img/W.png"></td><td><img id="Q" class="show" src="img/Q.png"></td><tr><th>Nivel 3</th><th>Nivel 4</th></tr></tr><tr><td><img id="D" class="show" src="img/D.png"></td><td><img id="K" class="show" src="img/K.png"></td></tr></table>');//añado la tabla para seleccionar los puzzles
 
     $("#content").append('<table id="tablPuzz"></table>');//creo una tabla en el div con la id content
 
@@ -122,28 +149,31 @@ $(function () {
         $("#generator").hide();//oculto el boton que genera la tabla
 
         function regenerateTable(param) {//creo una funcion que genera la tabla con el puzzle indicado
-            $("#helpImg").addClass("hider");//escondo la imagen de ayuda en caso de que se muestre
-            timeRestart();//reinicio el contador
-            moves = 0;//reinicio el contador de movimientos a 0
-            comod = 3;//reinicio el contador de comodines a 3
-            $("#help").show();//muestro el boton de ayuda
-            $('.moves').text("Movimientos: " + moves);//reinicio los movimientos
-            $('.comodin').text("Comodin: " + comod + " (Para gastar un comodin haz dobleclik en la imagen deseada)");//reinicio los comodines
-            var pos = ["1_1", "1_2", "1_3", "1_4", "2_1", "2_2", "2_3", "2_4", "3_1", "3_2", "3_3", "3_4", "4_1", "4_2", "4_3", "4_4",];//creo un array con las posiciones de las imagenes
-            shuffle(pos);//llamo a la funcion que desordena el array
-            var count = 1;//inicio una variable para usarla como contador
-            $(".empt").removeClass("empt");//vacio todas las posiciones vacias de la clase empt para evitar errores
-            for (var i = 1; i < 5; i++) {//inicio un bucle para randomizar las columnas de la tabla
-                for (var u = 1; u < 5; u++) {//inicio un bucle para randomizar las filas de la tabla
-                    if (u == 4 && i == 4) {//creo una condicion para la ultima posicion de la tabla
-                        $("#cell" + i + "_" + u + " img").attr("src", "img/N.png");//remplazo el src de imagen por la imagen neutra
-                        $("#cell" + i + "_" + u + " img").attr("id", 'c' + pos[count - 1] + '');//le asigno la id correspondiente
-                        $("#cell" + i + "_" + u + " img").attr("class", 'empt');//le añado la clase empt
-                    } else {//para el resto de posiciones
-                        $("#cell" + i + "_" + u + " img").attr("src", "img/" + param + "-" + pos[count - 1] + ".png");//remplazo la tabla con las imagenes randomizadas
-                        $("#cell" + i + "_" + u + " img").attr("id", 'c' + pos[count - 1] + '');//les asigno la id correspondiente
+            if (win == false) {//si el juego no ha sido completado
+                $("#helpImg").addClass("hider");//escondo la imagen de ayuda en caso de que se muestre
+                timeRestart();//reinicio el contador
+                moves = 0;//reinicio el contador de movimientos a 0
+                comod = 1;//reinicio el contador de comodines a 3
+                $("#help").show();//muestro el boton de ayuda
+                $("#pause").show();//muestro el boton de pausa
+                $('.moves').text("Movimientos: " + moves);//reinicio los movimientos
+                $('.comodin').text("Comodin: " + comod + " (Para gastar un comodin haz dobleclik en la imagen deseada)");//reinicio los comodines
+                var pos = ["1_1", "1_2", "1_3", "1_4", "2_1", "2_2", "2_3", "2_4", "3_1", "3_2", "3_3", "3_4", "4_1", "4_2", "4_3", "4_4",];//creo un array con las posiciones de las imagenes
+                shuffle(pos);//llamo a la funcion que desordena el array
+                var count = 1;//inicio una variable para usarla como contador
+                $(".empt").removeClass("empt");//vacio todas las posiciones vacias de la clase empt para evitar errores
+                for (var i = 1; i < 5; i++) {//inicio un bucle para randomizar las columnas de la tabla
+                    for (var u = 1; u < 5; u++) {//inicio un bucle para randomizar las filas de la tabla
+                        if (u == 4 && i == 4) {//creo una condicion para la ultima posicion de la tabla
+                            $("#cell" + i + "_" + u + " img").attr("src", "img/N.png");//remplazo el src de imagen por la imagen neutra
+                            $("#cell" + i + "_" + u + " img").attr("id", 'c' + pos[count - 1] + '');//le asigno la id correspondiente
+                            $("#cell" + i + "_" + u + " img").attr("class", 'empt');//le añado la clase empt
+                        } else {//para el resto de posiciones
+                            $("#cell" + i + "_" + u + " img").attr("src", "img/" + param + "-" + pos[count - 1] + ".png");//remplazo la tabla con las imagenes randomizadas
+                            $("#cell" + i + "_" + u + " img").attr("id", 'c' + pos[count - 1] + '');//les asigno la id correspondiente
+                        }
+                        count++;//incremento el contador
                     }
-                    count++;//incremento el contador
                 }
             }
         }
@@ -191,32 +221,34 @@ $(function () {
 
         function como() {//creo una funcion para gestionar los comodines
             if (win == false) {//si el puzzle no se ha resuelto
-                if (comod != 0) {//si los comodines llegan a 0
-                    var id = this.id;//almaceno la id
-                    var empId = $(".empt").attr("id");//almaceno la id del padre
-                    var arPos = id.split('');//lo almaceno en forma de array
-                    var posit = arPos[1] + arPos[2] + arPos[3];//guardo los caracteres que me indican la posicion
+                if ($("#" + this.id).attr("class") != "empt") {//si hago dobleclick sobre la celda y no es la celda vacia
+                    if (comod != 0) {//si los comodines llegan a 0
+                        var id = this.id;//almaceno la id
+                        var empId = $(".empt").attr("id");//almaceno la id del padre
+                        var arPos = id.split('');//lo almaceno en forma de array
+                        var posit = arPos[1] + arPos[2] + arPos[3];//guardo los caracteres que me indican la posicion
 
-                    $("#" + id).addClass("temp");//añado una clase temporal a la imagen seleccionada
+                        $("#" + id).addClass("temp");//añado una clase temporal a la imagen seleccionada
 
-                    $(".empt").attr("src", "img/" + CurrentPuzzle + "-" + posit + ".png");//le remplazo el src por el de la imagen deseada
-                    $(".empt").attr("id", id);//le cambio la id
-                    $(".empt").removeClass("empt");//le quito la clase que indica que esta vacio
+                        $(".empt").attr("src", "img/" + CurrentPuzzle + "-" + posit + ".png");//le remplazo el src por el de la imagen deseada
+                        $(".empt").attr("id", id);//le cambio la id
+                        $(".empt").removeClass("empt");//le quito la clase que indica que esta vacio
 
-                    $(".temp").attr("src", "img/N.png");//le remplazo el src por el de la imagen deseada
-                    $(".temp").addClass("empt");//le añado la clase que indica que esta vacio
-                    $(".temp").attr("id", empId);//le cambio la id
+                        $(".temp").attr("src", "img/N.png");//le remplazo el src por el de la imagen deseada
+                        $(".temp").addClass("empt");//le añado la clase que indica que esta vacio
+                        $(".temp").attr("id", empId);//le cambio la id
 
-                    $(".temp").removeClass("temp");//elimino la clase temp de quien la tenga
-                    moves++;//incremento los movimientos
-                    $('.moves').text("Movimientos: " + moves);//actualizo los movimientos
-                    comod--;//resto un comodin
-                    $('.comodin').text("Comodin: " + comod);//actualizo el comodin
+                        $(".temp").removeClass("temp");//elimino la clase temp de quien la tenga
+                        moves++;//incremento los movimientos
+                        $('.moves').text("Movimientos: " + moves);//actualizo los movimientos
+                        comod--;//resto un comodin
+                        $('.comodin').text("Comodin: " + comod);//actualizo el comodin
 
-                    compruebaCompletado();//llamo a la funciona para comprobar si se ha completado el puzzle
+                        compruebaCompletado();//llamo a la funciona para comprobar si se ha completado el puzzle
 
-                } else {//si no
-                    alert("No te quedan comodines");//aviso de que no qeudan comodines
+                    } else {//si no
+                        alert("No te quedan comodines");//aviso de que no qeudan comodines
+                    }
                 }
             }
         }
