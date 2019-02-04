@@ -71,15 +71,17 @@ $(function () {
     }
 
     $("#help").on("click", function helper() {//creo una funcion para mostrar/ocultar la ayuda del puzzle
-        var letter = $("#cell1_1 img").attr("src");//almaceno el src de una imagen de la tabla
-        letter = letter.split('');//lo transformo en un array
-        letter = letter[4];//almaceno el caracter deseado
-        if (first == true) {//si es la primera vez que ejecuto el codigo
-            $('<img id="helpImg" src="img/' + letter + '.png">').insertAfter('#showTable');//inserto la imagen de ayuda
-            first = false;//cambio la variable a false para indicar que ya no es la primera vez que ejecuto el codigo
-        } else {//si no
-            $("#helpImg").attr("src", 'img/' + letter + '.png');//cambio el atributo por la imagen del puzzle actual
-            $("#helpImg").toggleClass("hider");//le hago un toggle para que pueda mostrar/ocultar la imagen
+        if (win == false) {//si el juego no ha sido completado
+            var letter = $("#cell1_1 img").attr("src");//almaceno el src de una imagen de la tabla
+            letter = letter.split('');//lo transformo en un array
+            letter = letter[4];//almaceno el caracter deseado
+            if (first == true) {//si es la primera vez que ejecuto el codigo
+                $('<img id="helpImg" src="img/' + letter + '.png">').insertAfter('#showTable');//inserto la imagen de ayuda
+                first = false;//cambio la variable a false para indicar que ya no es la primera vez que ejecuto el codigo
+            } else {//si no
+                $("#helpImg").attr("src", 'img/' + letter + '.png');//cambio el atributo por la imagen del puzzle actual
+                $("#helpImg").toggleClass("hider");//le hago un toggle para que pueda mostrar/ocultar la imagen
+            }
         }
     });
 
@@ -153,7 +155,7 @@ $(function () {
                 $("#helpImg").addClass("hider");//escondo la imagen de ayuda en caso de que se muestre
                 timeRestart();//reinicio el contador
                 moves = 0;//reinicio el contador de movimientos a 0
-                comod = 1;//reinicio el contador de comodines a 3
+                comod = 20;//reinicio el contador de comodines a 3
                 $("#help").show();//muestro el boton de ayuda
                 $("#pause").show();//muestro el boton de pausa
                 $('.moves').text("Movimientos: " + moves);//reinicio los movimientos

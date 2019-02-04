@@ -53,7 +53,7 @@ h2{
 
 #tablPuzz{
     border-collapse: collapse;
-    border: 3px solid rgb(32, 27, 17);
+    border: 5px solid rgb(32, 27, 17);
 }
 #showTable{
     max-width: 393px;
@@ -61,10 +61,7 @@ h2{
     border-collapse: collapse;
     border: 3px solid rgb(32, 27, 17);
 }
-#tablPuzz th, td{
-    margin: 1px;
-    border: 3px solid rgb(32, 27, 17);
-}
+
 img{
     width: 95px;
 }
