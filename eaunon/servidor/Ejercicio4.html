@@ -1,0 +1,78 @@
+<!Doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <title>DAW</title>
+    <link rel="stylesheet" href="css/plantilla.css" />
+
+</head>
+
+<body>
+    <header>
+
+        <h2>Ejercicio 4</h2>
+
+    </header>
+    <div id="extra">
+        <div id="content">
+            <script>
+                var rand = Math.random();
+                rand = rand * 10;
+                rand = Math.round(rand);
+                var numer = new Array();
+                var pos = ["Primer", "Segundo", "Tercer", "Cuarto", "Quinto", "Sexto", "Septimo", "Octavo", "Noveno", "Decimo"];
+                var cont = 1;
+                if (rand == 0) {
+                    rand++;
+                }
+                var num = prompt("Adivina un número del 1 al 10 (10 intentos): ");
+                numer.push(num);
+                while ((num != rand) && cont < 10) {
+                    if (num > rand) {
+                        cont++;
+                        document.write("Has introducido el: " + num + "<br>");
+                        document.write("El numero que buscas es mas bajo<br>");
+                        num = prompt("Vuelve a intentarlo: ");
+                    } else if (num < rand) {
+                        cont++;
+                        document.write("Has introducido el: " + num + "<br>");
+                        document.write("El numero que buscas es mas alto<br>");
+                        num = prompt("Vuelve a intentarlo: ");
+                    }
+                    numer.push(num);
+                }
+                if (cont >= 8) {
+                    document.write("Has excedido el numero de intentos, el numero era: " + rand + "<br>");
+                } else {
+                    var cont2 = 0;
+                    while (cont2 < numer.length) {
+                        document.write(pos[cont2] + " intento: " + numer[cont2] + "<br>");
+                        cont2++;
+                    }
+
+
+                    document.write("El numero correcto es: " + rand + "<br>");
+                }
+
+
+            </script>
+
+            <a href="index.html"><input type="button" value="Volver" id="calc"></a><br>
+
+
+        </div>
+    </div>
+
+
+    <div id="ad">
+        publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>
+    </div>
+
+    <footer>
+        <p>Ernesto Auñón Bernabeu<br>2ºDAW 7K 2018-2019</p>
+    </footer>
+
+</body>
+
+</html>

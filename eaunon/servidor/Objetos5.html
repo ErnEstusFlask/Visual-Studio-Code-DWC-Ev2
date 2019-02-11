@@ -1,0 +1,45 @@
+<!Doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <title>DAW</title>
+    <link rel="stylesheet" href="css/plantilla.css" />
+
+</head>
+
+<body>
+    <header>
+
+        <h2>Objetos</h2>
+
+    </header>
+    <div id="extra">
+        <div id="content">
+            <script>
+                function DNI20sec() {
+                    var interV = setInterval(pideDni, 20000);
+                    function pideDni() {
+                        var dni = prompt("Introduce un DNI");
+                        if (dni == "-1") {
+                            clearInterval(interV);
+                        }
+                    }
+                }
+            </script>
+        </div>
+        <a href="index.html"><input type="button" value="Volver" id="calc"></a><br>
+    </div>
+
+
+    <div id="ad">
+        publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>
+    </div>
+
+    <footer>
+        <p>Ernesto Auñón Bernabeu<br>2ºDAW 7K 2018-2019</p>
+    </footer>
+
+</body>
+
+</html>

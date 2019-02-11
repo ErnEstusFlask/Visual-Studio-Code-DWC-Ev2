@@ -1,0 +1,176 @@
+<!Doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <title>DAW</title>
+    <link rel="stylesheet" href="css/plantilla.css" />
+
+</head>
+
+<body>
+    <header>
+
+        <h2>Objetos</h2>
+
+    </header>
+    <div id="extra">
+        <div id="content">
+            <script>
+                var a = new Date();
+                var oFecha = new Object();
+                oFecha.diaMes = a.getDate();
+                switch (diaMes) {
+                    case 1:
+                        oFecha.diaSemana = "Lunes";
+                        break;
+                    case 2:
+                        oFecha.diaSemana = "Martes";
+                        break;
+                    case 3:
+                        oFecha.diaSemana = "Miercoles";
+                        break;
+                    case 4:
+                        oFecha.diaSemana = "Jueves";
+                        break;
+                    case 5:
+                        oFecha.diaSemana = "Viernes";
+                        break;
+                    case 6:
+                        oFecha.diaSemana = "Sabado";
+                        break;
+                    case 7:
+                        oFecha.diaSemana = "Domingo";
+                        break;
+                }
+
+                oFecha.mesNum = a.getMonth();
+                switch (diaMes) {
+                    case 1:
+                        oFecha.mesNom = "Enero";
+                        break;
+                    case 2:
+                        oFecha.mesNom = "Febrero";
+                        break;
+                    case 3:
+                        oFecha.mesNom = "Marzo";
+                        break;
+                    case 4:
+                        oFecha.mesNom = "Abril";
+                        break;
+                    case 5:
+                        oFecha.mesNom = "Mayo";
+                        break;
+                    case 6:
+                        oFecha.mesNom = "Junio";
+                        break;
+                    case 7:
+                        oFecha.mesNom = "Julio";
+                        break;
+                    case 8:
+                        oFecha.mesNom = "Agosto";
+                        break;
+                    case 9:
+                        oFecha.mesNom = "Septiembre";
+                        break;
+                    case 10:
+                        oFecha.mesNom = "Octrubre";
+                        break;
+                    case 11:
+                        oFecha.mesNom = "Noviembre";
+                        break;
+                    case 12:
+                        oFecha.mesNom = "Diciembre";
+                        break;
+                }
+                oFecha.año = a.getFullYear();
+                oFecha.obtenFechaN() = function () {
+                    var FechaN = oFecha.diaMes + "/" + oFecha.mesNum + "/" + oFecha.año;
+                    return FechaN;
+                }
+                oFecha.obtenFecha() = function () {
+                    var Fecha = "Hoy es " + oFecha.diaSemana + " dia " + oFecha.diaMes + " de " + oFecha.mesNom + " del año " + oFecha.año;
+                    return FechaN;
+                }
+                oFecha.actualizaFecha() = function () {
+                    switch (diaMes) {
+                        case 1:
+                            oFecha.diaSemana = "Lunes";
+                            break;
+                        case 2:
+                            oFecha.diaSemana = "Martes";
+                            break;
+                        case 3:
+                            oFecha.diaSemana = "Miercoles";
+                            break;
+                        case 4:
+                            oFecha.diaSemana = "Jueves";
+                            break;
+                        case 5:
+                            oFecha.diaSemana = "Viernes";
+                            break;
+                        case 6:
+                            oFecha.diaSemana = "Sabado";
+                            break;
+                        case 7:
+                            oFecha.diaSemana = "Domingo";
+                            break;
+                    }
+                    oFecha.mesNum = a.getMonth();
+                    switch (diaMes) {
+                        case 1:
+                            oFecha.mesNom = "Enero";
+                            break;
+                        case 2:
+                            oFecha.mesNom = "Febrero";
+                            break;
+                        case 3:
+                            oFecha.mesNom = "Marzo";
+                            break;
+                        case 4:
+                            oFecha.mesNom = "Abril";
+                            break;
+                        case 5:
+                            oFecha.mesNom = "Mayo";
+                            break;
+                        case 6:
+                            oFecha.mesNom = "Junio";
+                            break;
+                        case 7:
+                            oFecha.mesNom = "Julio";
+                            break;
+                        case 8:
+                            oFecha.mesNom = "Agosto";
+                            break;
+                        case 9:
+                            oFecha.mesNom = "Septiembre";
+                            break;
+                        case 10:
+                            oFecha.mesNom = "Octrubre";
+                            break;
+                        case 11:
+                            oFecha.mesNom = "Noviembre";
+                            break;
+                        case 12:
+                            oFecha.mesNom = "Diciembre";
+                            break;
+                    }
+                    oFecha.año = a.getFullYear();
+                }
+            </script>
+        </div>
+        <a href="index.html"><input type="button" value="Volver" id="calc"></a><br>
+    </div>
+
+
+    <div id="ad">
+        publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>
+    </div>
+
+    <footer>
+        <p>Ernesto Auñón Bernabeu<br>2ºDAW 7K 2018-2019</p>
+    </footer>
+
+</body>
+
+</html>

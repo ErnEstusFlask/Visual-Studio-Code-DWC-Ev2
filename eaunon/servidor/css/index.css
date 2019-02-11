@@ -1,0 +1,178 @@
+*{
+    box-sizing: border-box;
+    font-family: Arial;
+}
+#grid{
+    clear: both;
+    display: grid;
+    grid-template-columns: 7fr auto;
+    grid-template-rows: auto;
+}
+
+header{
+    background-color: rgb(32, 27, 17);
+    color: rgb(218, 147, 0);
+    padding: 20px;
+}
+body{
+    background-color: rgb(118, 91, 36);
+}
+
+#dumper{
+    margin-top: 50px;
+}
+
+footer{
+    text-align:right;
+    color:rgb(1, 18, 49);
+    clear: both;
+    position: fixed;
+    bottom: 0;
+    right: 10px;
+}
+
+h2{
+    text-shadow: 2px 2px rgb(118, 91, 36);
+    text-transform: uppercase;
+    text-align: right;
+}
+#content{
+    background-color: rgb(255, 171, 0);
+    grid-column: 1;
+    grid-row: 1;
+    padding: 8px;
+}
+#ad{
+    grid-column: 2;
+    grid-row: 1;
+    background-color: rgb(7, 6, 5);
+    right: 0;
+    color: white;
+}
+
+#tablPuzz{
+    border-collapse: collapse;
+    border: 5px solid rgb(32, 27, 17);
+}
+#showTable{
+    max-width: 393px;
+    float: right;
+    border-collapse: collapse;
+    border: 3px solid rgb(32, 27, 17);
+}
+
+img{
+    width: 95px;
+}
+.show{
+    width: 190px;
+}
+
+.hider{
+    display: none;
+}
+/* button{
+    font-size: 18px;
+    background-color:rgb(32, 27, 17);
+    color :rgb(255, 171, 0);
+} */
+
+
+#menu {
+   
+    text-align: center;
+    font-size: 0.7em;
+    width: 1200px;
+}
+#menu ul {list-style-type: none;
+}
+#menu ul li {width: 162px;
+}
+#menu ul li.nivel1 { float: left;
+margin-right: 1px;
+}
+#menu ul li button {display: block;
+text-decoration: none;
+color: rgb(255, 171, 0);
+background-color: rgb(32, 27, 17);
+border: solid 1px #fff;
+padding: 8px;
+position: relative;
+}
+#menu ul li a {display: block;
+    text-decoration: none;
+    color: rgb(255, 171, 0);
+    background-color: rgb(32, 27, 17);
+    border: solid 1px #fff;
+    padding: 8px;
+    position: relative;
+    }
+#menu ul li button.nivel2, #menu ul li button.nivel2ie {color: #000;
+}
+#menu ul li button.nivel2, #menu ul li a.nivel2ie {color: #000;
+}
+#menu ul li button.nivel1, #menu ul li button.nivel2 {display: block!important;display: none;
+position: relative;
+}
+#menu ul li button.nivel1, #menu ul li a.nivel2 {display: block!important;display: none;
+    position: relative;
+    }
+#menu ul li:hover {position: relative;
+}
+#menu ul li button:hover, #menu ul li:hover button.nivel1 {background-color: rgb(255, 171, 0);
+color: #000;
+position: relative;
+}
+#menu ul li button:hover, #menu ul li:hover a.nivel1 {
+    background-color: rgb(255, 171, 0);
+    color: #000;
+    position: relative;
+    }
+#menu ul li ul {display: none;
+}
+#menu ul li:hover  ul.nivel2, #menu ul li button:hover  ul.nivel2{display: block;
+position: absolute;left: 0px;
+}
+#menu ul li:hover  ul.nivel2, #menu ul li a:hover  ul.nivel2{display: block;
+    position: absolute;left: 0px;
+    }
+#menu ul li ul li button:hover ul.nivel3, #menu ul li ul li:hover ul.nivel3 {display: block;
+position: absolute;
+left: 161px;left: 160px;
+top:0px;top: -21px;
+}
+#menu ul li ul li a:hover ul.nivel3, #menu ul li ul li:hover ul.nivel3 {display: block;
+    position: absolute;
+    left: 161px;left: 160px;
+    top:0px;top: -21px;
+    }
+#menu ul li ul li button {width: 160px;
+    padding: 8px 0px;
+    border-top-color: transparent;
+}
+#menu ul li ul li a {width: 160px;
+    padding: 8px 0px;
+    border-top-color: transparent;
+}
+#menu ul li ul li button:hover {
+    border-top-color: #000;
+    position: relative;
+}
+#menu ul li ul li a:hover {
+    border-top-color: #000;
+    position: relative;
+}
+#menu ul li ul li ul li button.primera {border-top-color: #fff;
+}
+#menu ul li ul li ul li a.primera {border-top-color: #fff;
+}
+table.falsa {border-collapse:collapse;
+border:0px;
+float: left;
+position: relative;
+}
+
+li .nivel1{
+    height: 45px;
+    align-content: center;
+}

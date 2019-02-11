@@ -1,0 +1,58 @@
+<!Doctype html>
+<html lang="es"    >
+<head>
+    <meta charset="utf-8" />
+    <title>DAW</title>    
+    <link rel="stylesheet"  href="css/plantilla.css" />
+    
+</head>
+<body>
+    <header>
+        
+        <h2>Switch-Color</h2>
+        
+    </header>
+    <div id="extra">
+            <div id="content">
+                
+            </div>
+    </div>
+
+    
+    <div id="ad">
+        publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>
+    </div>
+    
+    <footer>
+        <p>Ernesto Auñón Bernabeu<br>2ºDAW 7K 2018-2019</p>
+    </footer>
+    <script>
+                    var name=prompt("Introduce un nombre");
+                    var nameLow= name.toLowerCase();                    
+                    switch(nameLow){
+                        default:{
+                            document.write("Tu nombre no esta en la base de datos.");
+                            break;
+                        }
+                        case"julian":{
+                            document.getElementById("content").style.backgroundColor="white";
+                            document.write("Hola "+name);
+                            break;
+                        }
+                        case"ernesto":{
+                            document.getElementById("content").style.backgroundColor="crimson";
+                            document.write("Hola "+name);
+                            break;
+                        }
+                        case"hector":{
+                            document.getElementById("content").style.backgroundColor="green";
+                            document.write("Hola "+name);
+                            break;
+                        }
+                        
+                        
+                    }
+                </script>
+                <a href="index.html"><input type="button" value="Volver" id="calc"></a><br>
+</body>
+</html>

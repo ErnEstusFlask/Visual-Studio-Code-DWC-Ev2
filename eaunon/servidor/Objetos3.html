@@ -1,0 +1,69 @@
+<!Doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <title>DAW</title>
+    <link rel="stylesheet" href="css/plantilla.css" />
+
+</head>
+
+<body>
+    <header>
+
+        <h2>Objetos</h2>
+
+    </header>
+    <div id="extra">
+        <div id="content">
+            <script>
+                function actDate() {
+                    var a = new Date();
+                    var b = a.getDay();
+                    var semana;
+                    switch (b) {
+                        case 1:
+                            semana = "Lunes";
+                            break;
+                        case 2:
+                            semana = "Martes";
+                            break;
+                        case 3:
+                            semana = "Miercoles";
+                            break;
+                        case 4:
+                            semana = "Jueves";
+                            break;
+                        case 5:
+                            semana = "Viernes";
+                            break;
+                        case 6:
+                            semana = "Sabado";
+                            break;
+                        case 7:
+                            semana = "Domingo";
+                            break;
+                    }
+                    var dia = a.getDate();
+                    var mes = a.getMonth();
+                    var año = a.getFullYear();
+                    document.write("Hoy es " + semana + " dia " + dia + " del mes " + mes + " del año " + año);
+                }
+                actDate();
+            </script>
+        </div>
+        <a href="index.html"><input type="button" value="Volver" id="calc"></a><br>
+    </div>
+
+
+    <div id="ad">
+        publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>
+    </div>
+
+    <footer>
+        <p>Ernesto Auñón Bernabeu<br>2ºDAW 7K 2018-2019</p>
+    </footer>
+
+</body>
+
+</html>

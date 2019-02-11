@@ -1,0 +1,62 @@
+<!Doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <title>DAW</title>
+    <link rel="stylesheet" href="css/plantilla.css" />
+
+</head>
+
+<body>
+    <header>
+
+        <h2>Ejercicio 3</h2>
+
+    </header>
+    <div id="extra">
+        <div id="content">
+            <script>
+                var rand = Math.random();
+                rand = rand * 10;
+                rand = Math.round(rand);
+                var cont = 1;
+                if (rand == 0) {
+                    rand++;
+                }
+                var num = prompt("Adivina un número del 1 al 10: ");
+                while (num != rand) {
+                    if (num > rand) {
+                        cont++
+                        document.write("Has introducido el: " + num + "<br>");
+                        document.write("El numero que buscas es mas bajo<br>");
+                        num = prompt("Vuelve a intentarlo: ");
+                    } else if (num < rand) {
+                        cont++
+                        document.write("Has introducido el: " + num + "<br>");
+                        document.write("El numero que buscas es mas alto<br>");
+                        num = prompt("Vuelve a intentarlo: ");
+                    }
+                }
+                document.write("Has acertado en " + cont + " intentos, el numero era: " + rand);
+
+            </script>
+
+            <a href="index.html"><input type="button" value="Volver" id="calc"></a><br>
+
+
+        </div>
+    </div>
+
+
+    <div id="ad">
+        publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>
+    </div>
+
+    <footer>
+        <p>Ernesto Auñón Bernabeu<br>2ºDAW 7K 2018-2019</p>
+    </footer>
+
+</body>
+
+</html>

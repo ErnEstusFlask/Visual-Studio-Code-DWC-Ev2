@@ -1,0 +1,68 @@
+<!Doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <title>DAW</title>
+    <link rel="stylesheet" href="css/plantilla.css" />
+
+</head>
+
+<body>
+    <header>
+
+        <h2>Objetos</h2>
+
+    </header>
+    <div id="extra">
+        <div id="content">
+            <script>
+                var aInt = "6+9";
+                function calC(operray) {
+                    var oper1;
+                    var oper2;
+                    var inst;
+                    var checker;
+                    var max = operray.length;
+                    for (i = 1; i < max; i++) {
+                        checker = operray.slice(i - 1, i);
+                        if (checker == "+" || checker == "-" || checker == "/" || checker == "*") {
+                            oper1 = operray.slice(0, i - 1);
+                            inst = operray[i - 1];
+                            oper2 = operray.slice(i, max);
+                        }
+                    }
+                    oper1 = parseFloat(oper1);
+                    oper2 = parseFloat(oper2);
+                    if (inst == "+") {
+                        return oper1 + oper2;
+                    }
+                    if (inst == "-") {
+                        return oper1 - oper2;
+                    }
+                    if (inst == "*") {
+                        return oper1 * oper2;
+                    }
+                    if (inst == "/") {
+                        return oper1 / oper2;
+                    }
+                }
+                var res = calC(aInt);
+                document.write(res);
+            </script>
+        </div>
+
+    </div>
+    <a href="index.html"><input type="button" value="Volver" id="calc"></a><br>
+
+    <div id="ad">
+        publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>publicidad<br>
+    </div>
+
+    <footer>
+        <p>Ernesto Auñón Bernabeu<br>2ºDAW 7K 2018-2019</p>
+    </footer>
+
+</body>
+
+</html>

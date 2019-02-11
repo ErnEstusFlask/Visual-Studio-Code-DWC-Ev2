@@ -1,0 +1,131 @@
+<!Doctype html>
+<html lang="es"    >
+<head>
+    <meta charset="utf-8" />
+    <title>DAW</title>    
+    <link rel="stylesheet"  href="css/plantilla.css" />
+
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Refresco</th>
+            <th>Precio</th>
+        </tr>
+        <tr>
+            <td>CocaCola</td>
+            <td>0.85</td>
+        </tr>
+        <tr>
+            <td>Fanta de Naranja</td>
+            <td>0.80</td>
+        </tr>
+        <tr>
+            <td>Fanta de Limón</td>
+            <td>0.80</td>
+        </tr>
+        <tr>
+            <td>CocaCola Zero</td>
+            <td>0.85</td>
+        </tr>
+        <tr>
+            <td>Nestea</td>
+            <td>0.90</td>
+        </tr>
+        <tr>
+            <td>Aquarius</td>
+            <td>0.90</td>
+        </tr>
+    </table>
+    <script> 
+        var cambio;
+        parseInt(cambio);
+        var refr = prompt("Selecciona un refresco").toLowerCase();
+        if((refr=="cocacola")||(refr=="fanta de naranja")||(refr=="fanta de limon")||(refr=="cocacola zero")||(refr=="nestea")||(refr=="aquarius")){
+            document.writeln("Ha seleccionado "+refr);
+            var din= prompt("Introduce el dinero");
+            if(!isNaN(din)){
+                document.writeln("Ha introducido "+din+"€");
+                if(refr=="cocacola"){
+                    cambio= parseFloat(din-0.85);
+                                    }
+                if(refr=="fanta de naranja"){
+                    cambio= parseFloat(din)-0.80;
+                                    }
+                if(refr=="fanta de limon"){
+                    cambio= parseFloat(din)-0.80;
+                                    }
+                if(refr=="cocacola zero"){
+                    cambio= parseFloat(din)-0.85;
+                                    }
+                if(refr=="nestea"){
+                    cambio= parseFloat(din)-0.90;
+                                    }
+                if(refr=="aquarius"){
+                    cambio= parseFloat(din)-0.90;
+                                    }
+            }else{
+                document.writeln("Introduce una cantidad correcta");
+            }
+            
+        }else{
+            document.writeln("Datos erroneos ");
+        }
+
+    </script>
+    <table>
+            <tr>
+                <th>Refresco seleccionado</th>
+                <th>Precio</th>
+                <th>Dinero introducido</th>
+                <th>Cambio</th>
+            </tr>
+            <tr>
+                <td><script>
+                    if(refr=="cocacola"){
+                    document.writeln(refr);
+                                    
+                }else if(refr=="fanta de naranja"){
+                    document.writeln(refr);
+                                    
+                }else if(refr=="fanta de limon"){
+                    document.writeln(refr);
+                                    
+                }else if(refr=="cocacola zero"){
+                    document.writeln(refr);
+
+                }else if(refr=="nestea"){
+                    document.writeln(refr);
+                                    
+                }else if(refr=="aquarius"){
+                    document.writeln(refr);
+                                    }
+                </script></td>
+                <td><script>
+                    if(refr=="cocacola"){
+                    document.writeln(0.85);
+                                    
+                }else if(refr=="fanta de naranja"){
+                    document.writeln(0.80);
+                                    
+                }else if(refr=="fanta de limon"){
+                    document.writeln(0.80);
+                                    
+                }else if(refr=="cocacola zero"){
+                    document.writeln(0.85);
+
+                }else if(refr=="nestea"){
+                    document.writeln(0.90);
+                                    
+                }else if(refr=="aquarius"){
+                    document.writeln(0.90);
+                                    }
+                </script></td>
+                <td><script>document.writeln(din);</script></td>
+                <td><script>document.writeln(cambio);</script></td>
+            </tr>
+        </table>
+ <a href="index.html"><input type="button" value="Volver" id="calc"></a><br>
+    
+</body>
+</html>
